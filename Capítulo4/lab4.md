@@ -30,7 +30,7 @@ Como analista de datos, aprenderás a generar visualizaciones efectivas a partir
 
     **NOTA:** Si ya tienes el cluster creado avanza al **Paso 2**
 
-    [Clic Aquí para ir a Práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.md)
+    [Clic Aquí para ir a Práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
 
 - **Paso 2.** Accede a tu workspace de Databricks dando clic en el boton **Launch Workspace**
 
@@ -82,19 +82,20 @@ Verificar que los datos estén disponibles y correctos.
 
     **NOTA:** Si es necesario carga los datos de la tabla `resumen_ventas` que exportaste del laboratorio anterior.
 
-    ```sql
-    SELECT * FROM resumen_ventas LIMIT 10;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img2.png)
+  ```sql
+  SELECT * FROM resumen_ventas LIMIT 10;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img2.png)
+
 - **Paso 2.** Valida que no haya valores nulos en campos críticos:
 
-    ```sql
-    SELECT COUNT(*) FROM resumen_ventas
-    WHERE TotalVentas IS NULL OR NumVentas IS NULL;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img3.png)
+  ```sql
+  SELECT COUNT(*) FROM resumen_ventas
+  WHERE TotalVentas IS NULL OR NumVentas IS NULL;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img3.png)
 
 > **TAREA FINALIZADA**
 
@@ -110,48 +111,50 @@ Crear distintos tipos de gráficos usando consultas optimizadas desde el editor 
 
     > Visualización: Tipo **Bar chart**, eje X: Provincia, eje Y: VentasTotales
 
-    ```sql
-    SELECT Provincia, SUM(TotalVentas) AS VentasTotales
-    FROM resumen_ventas
-    GROUP BY Provincia
-    ORDER BY VentasTotales DESC;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img4.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img5.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img6.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img7.png)
-    ---
+  ```sql
+  SELECT Provincia, SUM(TotalVentas) AS VentasTotales
+  FROM resumen_ventas
+  GROUP BY Provincia
+  ORDER BY VentasTotales DESC;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img4.png)
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img5.png)
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img6.png)
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img7.png)
+  ---
     
 - **Paso 2.** Gráfico de líneas: Evolución mensual de ventas en CDMX
 
     > Visualización: **Line chart**, eje X: Periodo, eje Y: VentasMensuales
 
-    ```sql
-    SELECT CONCAT(Anio, '-', LPAD(Mes, 2, '0')) AS Periodo, SUM(TotalVentas) AS VentasMensuales
-    FROM resumen_ventas
-    WHERE Provincia = 'CDMX'
-    GROUP BY Anio, Mes
-    ORDER BY Periodo;
-    ```
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img8.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img9.png)    
+  ```sql
+  SELECT CONCAT(Anio, '-', LPAD(Mes, 2, '0')) AS Periodo, SUM(TotalVentas) AS VentasMensuales
+  FROM resumen_ventas
+  WHERE Provincia = 'CDMX'
+  GROUP BY Anio, Mes
+  ORDER BY Periodo;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img8.png)
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img9.png)    
 
 - **Paso 3.** Gráfico de dispersión: Total vs Promedio de descuento
 
     > Visualización: **Scatter plot**, eje X: PromDescuento, eje Y: TotalVentas
 
-    ```sql
-    SELECT TotalVentas, PromDescuento
-    FROM resumen_ventas;
-    ```
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img10.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img11.png)
+  ```sql
+  SELECT TotalVentas, PromDescuento
+  FROM resumen_ventas;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img10.png)
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img11.png)
 
 > **TAREA FINALIZADA**
 
@@ -211,50 +214,50 @@ Permitir al usuario explorar los datos seleccionando valores dinámicamente.
 
 - **Paso 2.** Agrega esta celda antes de tu consulta de gráfico de barras y agrega un filtro de tipo dropdown para `Provincia`. El filtro se agregara en la parte de arriba del notebook.
 
-    ```python
-    %python
-    dbutils.widgets.dropdown("provincia", "CDMX", ["CDMX", "Jalisco", "Nuevo León", "Puebla", "Todas"])
-    provincia = dbutils.widgets.get("provincia")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img20.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img21.png)
+  ```python
+  %python
+  dbutils.widgets.dropdown("provincia", "CDMX", ["CDMX", "Jalisco", "Nuevo León", "Puebla", "Todas"])
+  provincia = dbutils.widgets.get("provincia")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img20.png)
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img21.png)
 
 - **Paso 3.** Modifica la consulta SQL para aplicar el filtro
 
-    ```sql
-    SELECT Provincia, SUM(TotalVentas) AS VentasTotales
-    FROM resumen_ventas
-    WHERE ('${provincia}' = 'Todas' OR Provincia = '${provincia}')
-    GROUP BY Provincia
-    ORDER BY VentasTotales DESC;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img22.png)
+  ```sql
+  SELECT Provincia, SUM(TotalVentas) AS VentasTotales
+  FROM resumen_ventas
+  WHERE ('${provincia}' = 'Todas' OR Provincia = '${provincia}')
+  GROUP BY Provincia
+  ORDER BY VentasTotales DESC;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img22.png)
 
 - **Paso 4.** Agrega un filtro adicional por `Año`. Antes de la celda de linea agrega el filtro.
 
-    ```python
-    %python
-    dbutils.widgets.dropdown("anio", "2024", ["2022", "2023", "2024", "2025"])
-    anio = dbutils.widgets.get("anio")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img23.png)
+  ```python
+  %python
+  dbutils.widgets.dropdown("anio", "2024", ["2022", "2023", "2024", "2025"])
+  anio = dbutils.widgets.get("anio")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img23.png)
 
 - **Paso 5.** Ajusta la consulta:
 
-    ```sql
-    SELECT CONCAT(Anio, '-', LPAD(Mes, 2, '0')) AS Periodo,
-        SUM(TotalVentas) AS VentasMensuales
-    FROM resumen_ventas
-    WHERE Provincia = 'CDMX' AND Anio = ${anio}
-    GROUP BY Anio, Mes
-    ORDER BY Periodo;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img24.png)
+  ```sql
+  SELECT CONCAT(Anio, '-', LPAD(Mes, 2, '0')) AS Periodo,
+      SUM(TotalVentas) AS VentasMensuales
+  FROM resumen_ventas
+  WHERE Provincia = 'CDMX' AND Anio = ${anio}
+  GROUP BY Anio, Mes
+  ORDER BY Periodo;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img24.png)
 
 - **Paso 6.** Ahora ve al dashboard donde estan todos los gráficos. Ajusta los filtros par ala prueba. Luego da clic en el botón `Run All`, y mira los cambios.
 

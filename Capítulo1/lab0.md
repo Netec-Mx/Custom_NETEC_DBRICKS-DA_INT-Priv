@@ -47,50 +47,50 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
 
     **NOTA:** Cambia las `xxx`por tus iniciales. Ejemplo `jjon`, `mperez`. Editalo en un **bloc de notas** si es necesario.
 
-    ```bash
-    export USER_ID=xxxxx
-    export LOCATION=eastus
-    export RESOURCE_GROUP="rg-${USER_ID}"
-    export DATABRICKS_WS="dbw-${USER_ID}"
-    export CLUSTER_NAME="cluster-${USER_ID}"
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img4.png)
+  ```bash
+  export USER_ID=xxxxx
+  export LOCATION=eastus
+  export RESOURCE_GROUP="rg-${USER_ID}"
+  export DATABRICKS_WS="dbw-${USER_ID}"
+  export CLUSTER_NAME="cluster-${USER_ID}"
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img4.png)
 
 - **Paso 5.** Verifica que las variables se hayan creado correctamente, ejecuta los siguientes comandos.
 
-    ```bash
-    echo $USER_ID
-    echo $LOCATION
-    echo $RESOURCE_GROUP
-    echo $DATABRICKS_WS
-    echo $CLUSTER_NAME
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img5.png)
+  ```bash
+  echo $USER_ID
+  echo $LOCATION
+  echo $RESOURCE_GROUP
+  echo $DATABRICKS_WS
+  echo $CLUSTER_NAME
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img5.png)
 
-    **NOTA:** Si se cierra la terminal las variables se pierden, repite el paso 4 para crearlas nuevamente.
+  **NOTA:** Si se cierra la terminal las variables se pierden, repite el paso 4 para crearlas nuevamente.
 
 - **Paso 6.** Crea un grupo de recursos.
 
-    ```bash
-    az group create --name $RESOURCE_GROUP --location $LOCATION --tags user=$USER_ID lab=lab1
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img6.png)
+  ```bash
+  az group create --name $RESOURCE_GROUP --location $LOCATION --tags user=$USER_ID lab=lab1
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img6.png)
 
 - **Paso 7.** Crea un workspace de Databricks en Azure:
 
-    ```bash
-    az databricks workspace create \
-      --resource-group $RESOURCE_GROUP \
-      --name $DATABRICKS_WS \
-      --location $LOCATION \
-      --sku standard \
-      --tags user=$USER_ID lab=lab1
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img7.png)
+  ```bash
+  az databricks workspace create \
+    --resource-group $RESOURCE_GROUP \
+    --name $DATABRICKS_WS \
+    --location $LOCATION \
+    --sku standard \
+    --tags user=$USER_ID lab=lab1
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img7.png)
     ---
     **NOTA:** Si te aparce el siguiente mensaje escribe **`Y`**. Y Espera de **3 a 5 minutos** en lo que instala el `provider`.
     
@@ -143,28 +143,28 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
 
 - **Paso 16.** Luego, crea un clúster de procesamiento usando la API REST para mayor facilidad.
 
-    ```bash
-    curl -X POST https://$DATABRICKS_HOST/api/2.0/clusters/create \
-      -H "Authorization: Bearer $DATABRICKS_TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "cluster_name": "'"$CLUSTER_NAME"'",
-        "spark_version": "13.3.x-scala2.12",
-        "node_type_id": "Standard_D4s_v3",
-        "num_workers": 1,
-        "spark_conf": {
-          "spark.databricks.cluster.profile": "singleNode"
-        },
-        "custom_tags": {
-          "user": "'"$USER_ID"'",
-          "lab": "labs",
-          "ResourceClass": "SingleNode"
-        },
-        "autotermination_minutes": 30
-      }'
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img17.png)
+  ```bash
+  curl -X POST https://$DATABRICKS_HOST/api/2.0/clusters/create \
+    -H "Authorization: Bearer $DATABRICKS_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "cluster_name": "'"$CLUSTER_NAME"'",
+      "spark_version": "13.3.x-scala2.12",
+      "node_type_id": "Standard_D4s_v3",
+      "num_workers": 1,
+      "spark_conf": {
+        "spark.databricks.cluster.profile": "singleNode"
+      },
+      "custom_tags": {
+        "user": "'"$USER_ID"'",
+        "lab": "labs",
+        "ResourceClass": "SingleNode"
+      },
+      "autotermination_minutes": 30
+    }'
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img17.png)
 
 > **TAREA FINALIZADA**
 ---

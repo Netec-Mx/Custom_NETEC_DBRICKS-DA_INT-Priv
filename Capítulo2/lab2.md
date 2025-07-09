@@ -30,7 +30,7 @@ Como analista de datos, aprenderás a consumir información desde una tabla exis
 
     **NOTA:** Si ya tienes el cluster creado avanza al **Paso 2**
 
-    [Clic Aquí para ir a Práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.md)
+    [Clic Aquí para ir a Práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
 
 - **Paso 2.** Accede a tu workspace de Databricks dando clic en el boton **Launch Workspace**
 
@@ -91,41 +91,41 @@ Antes de transformar los datos, es esencial entender su estado actual: estructur
 
 - **Paso 1.** Revisar el esquema de la tabla `ventas`  
 
-    ```sql
-    DESCRIBE TABLE ventas;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img2.png)
+  ```sql
+  DESCRIBE TABLE ventas;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img2.png)
 
 
 - **Paso 2** Contar registros totales  
     
-    ```python
-    %python
-    spark.table("ventas").count()
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img3.png)
+  ```python
+  %python
+  spark.table("ventas").count()
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img3.png)
 
 - **Paso 3.** Contar valores nulos por columna  
     
-    ```python
-    %python
-    from pyspark.sql.functions import col, sum as _sum
-    ventas = spark.table("ventas")
-    ventas.select([_sum(col(c).isNull().cast("int")).alias(c) for c in ventas.columns]).show()
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img4.png)
+  ```python
+  %python
+  from pyspark.sql.functions import col, sum as _sum
+  ventas = spark.table("ventas")
+  ventas.select([_sum(col(c).isNull().cast("int")).alias(c) for c in ventas.columns]).show()
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img4.png)
 
 - **Paso 4.** Contar duplicados exactos 
 
-    ```python
-    %python
-    ventas.groupBy(ventas.columns).count().filter("count > 1").count()
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img5.png)
+  ```python
+  %python
+  ventas.groupBy(ventas.columns).count().filter("count > 1").count()
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img5.png)
 
 > **TAREA FINALIZADA**
 
@@ -141,62 +141,62 @@ En esta tarea se procesarán los datos usando PySpark, generando un nuevo DataFr
 
 - **Paso 1.** Eliminar filas con valores nulos en columnas críticas  
 
-    ```python
-    %python
-    display(ventas.filter(col("PrecioUd").isNull() | col("Unidades").isNull() | col("Fecha").isNull()))
-    ventas_limpias = ventas.dropna(subset=["PrecioUd", "Unidades", "Fecha"])
-    display(ventas_limpias)
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img6.png)
+  ```python
+  %python
+  display(ventas.filter(col("PrecioUd").isNull() | col("Unidades").isNull() | col("Fecha").isNull()))
+  ventas_limpias = ventas.dropna(subset=["PrecioUd", "Unidades", "Fecha"])
+  display(ventas_limpias)
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img6.png)
 
 - **Paso 2.** Eliminar duplicados exactos
 
-    ```python
-    %python
-    from pyspark.sql.functions import count
-    ventas.groupBy("NumPed", "Fecha", "Articulo").count().filter("count > 1").show()
-    ventas.exceptAll(ventas.dropDuplicates()).show()
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img7.png)
+  ```python
+  %python
+  from pyspark.sql.functions import count
+  ventas.groupBy("NumPed", "Fecha", "Articulo").count().filter("count > 1").show()
+  ventas.exceptAll(ventas.dropDuplicates()).show()
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img7.png)
 
 - **Paso 3.** Convertir columna `Fecha` a tipo fecha  
 
-    ```python
-    %python
-    ventas.select("Fecha").distinct().show(5)
-    ventas_limpias.select("Fecha").distinct().show(5)
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img8.png)
+  ```python
+  %python
+  ventas.select("Fecha").distinct().show(5)
+  ventas_limpias.select("Fecha").distinct().show(5)
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img8.png)
 
 #### Tarea 3.2 
 
 - **Paso 1.** Calcular columna `TotalNeto`  
 
-    ```python
-    %python
-    from pyspark.sql.functions import col, round
-    ventas_limpias = ventas_limpias.withColumn(
-        "TotalNeto", round(col("Unidades") * col("PrecioUd") * (1 - col("Descuento") / 100), 2)
-    )
-    ventas_limpias.select("NumPed", "Unidades", "PrecioUd", "Descuento", "TotalNeto").show(10)
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img9.png)
+  ```python
+  %python
+  from pyspark.sql.functions import col, round
+  ventas_limpias = ventas_limpias.withColumn(
+      "TotalNeto", round(col("Unidades") * col("PrecioUd") * (1 - col("Descuento") / 100), 2)
+  )
+  ventas_limpias.select("NumPed", "Unidades", "PrecioUd", "Descuento", "TotalNeto").show(10)
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img9.png)
 
 
 - **Paso 2.** Extraer `Mes` y `Anio`  
     
-    ```python
-    %python
-    from pyspark.sql.functions import month, year
-    ventas_limpias = ventas_limpias.withColumn("Mes", month("Fecha")).withColumn("Anio", year("Fecha"))
-    ventas_limpias.select("Fecha", "Mes", "Anio").show(10)
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img10.png)
+  ```python
+  %python
+  from pyspark.sql.functions import month, year
+  ventas_limpias = ventas_limpias.withColumn("Mes", month("Fecha")).withColumn("Anio", year("Fecha"))
+  ventas_limpias.select("Fecha", "Mes", "Anio").show(10)
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img10.png)
 
 > **TAREA FINALIZADA**
 
@@ -212,21 +212,21 @@ Guardar los resultados de PySpark en una nueva tabla Delta llamada `ventas_limpi
 
 - **Paso 1.** Guardar la tabla  
 
-    ```python
-    %python
-    ventas_limpias.write.format("delta").mode("overwrite").saveAsTable("ventas_limpias")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img11.png)
+  ```python
+  %python
+  ventas_limpias.write.format("delta").mode("overwrite").saveAsTable("ventas_limpias")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img11.png)
 
 
 - **Paso 2.** Validar desde SQL  
 
-    ```sql
-    SELECT COUNT(*), AVG(TotalNeto), MIN(Fecha), MAX(Fecha) FROM ventas_limpias;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img12.png)
+  ```sql
+  SELECT COUNT(*), AVG(TotalNeto), MIN(Fecha), MAX(Fecha) FROM ventas_limpias;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img12.png)
 
 - **Paso 3.** Para validar desde la interfaz gráfica da clic en la seccion **Catalog** del menú lateral izquierdo.
 
@@ -240,38 +240,38 @@ Guardar los resultados de PySpark en una nueva tabla Delta llamada `ventas_limpi
 
 - **Paso 6.** Ejecuta el siguiente comando que escribe el CSV como archivo único en una carpeta pública.
 
-    ```python
-    %python
-    df = spark.table("ventas_limpias")
-    # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
-    df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/ventas_limpias")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img21.png)
+  ```python
+  %python
+  df = spark.table("ventas_limpias")
+  # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
+  df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/ventas_limpias")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img21.png)
 
 - **Paso 7.** Lista y extrae el nombre real del archivo
 
-    ```python
-    %python
-    files = dbutils.fs.ls("dbfs:/FileStore/ventas_limpias")
+  ```python
+  %python
+  files = dbutils.fs.ls("dbfs:/FileStore/ventas_limpias")
 
-    for f in files:
-        if f.name.endswith(".csv"):
-            print(f.name)
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img22.png)
+  for f in files:
+      if f.name.endswith(".csv"):
+          print(f.name)
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img22.png)
 
 - **Paso 8.** Descargalo comodamente generando un enlace desde notebook.
 
-    ```python
-    %python
-    workspace_url = spark.conf.get("spark.databricks.workspaceUrl")
-    filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/ventas_limpias") if f.name.endswith(".csv")][0]
-    displayHTML(f"<a href='https://{workspace_url}/files/ventas_limpias/{filename}' target='_blank'>📥 Descargar CSV</a>")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img23.png)
+  ```python
+  %python
+  workspace_url = spark.conf.get("spark.databricks.workspaceUrl")
+  filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/ventas_limpias") if f.name.endswith(".csv")][0]
+  displayHTML(f"<a href='https://{workspace_url}/files/ventas_limpias/{filename}' target='_blank'>📥 Descargar CSV</a>")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img23.png)
 
 - **Paso 9.** Guarda el archivo como **`ventas_limpias`**.
 
@@ -289,99 +289,99 @@ Para analistas que prefieren SQL, se ofrece un flujo equivalente a las tareas 2 
 
 - **Paso 1.** Crear una vista filtrada sin valores nulos y verifica el rsultado
 
-    ```sql
-    CREATE OR REPLACE TEMP VIEW ventas_filtradas AS
-    SELECT * FROM ventas
-    WHERE PrecioUd IS NOT NULL AND Unidades IS NOT NULL AND Fecha IS NOT NULL;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img15.png)
-    ---
-    ```sql
-    SELECT * FROM ventas_filtradas LIMIT 10;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img16.png)
-    ---
+  ```sql
+  CREATE OR REPLACE TEMP VIEW ventas_filtradas AS
+  SELECT * FROM ventas
+  WHERE PrecioUd IS NOT NULL AND Unidades IS NOT NULL AND Fecha IS NOT NULL;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img15.png)
+  ---
+  ```sql
+  SELECT * FROM ventas_filtradas LIMIT 10;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img16.png)
+  ---
 
 - **Paso 2.** Crear vista sin duplicados  
 
-    ```sql
-    CREATE OR REPLACE TEMP VIEW ventas_deduplicadas AS
-    SELECT DISTINCT * FROM ventas_filtradas;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img17.png)
-    ---
-    ```sql
-    SELECT * FROM ventas_deduplicadas LIMIT 10;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img18.png)
+  ```sql
+  CREATE OR REPLACE TEMP VIEW ventas_deduplicadas AS
+  SELECT DISTINCT * FROM ventas_filtradas;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img17.png)
+  ---
+  ```sql
+  SELECT * FROM ventas_deduplicadas LIMIT 10;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img18.png)
 
 #### Tarea 5.2  
 
 - **Paso 1.** Crear tabla enriquecida con nuevas columnas  
 
-    ```sql
-    CREATE OR REPLACE TABLE ventas_limpias_sql AS
-    SELECT 
-    *,
-    ROUND(Unidades * PrecioUd * (1 - Descuento / 100), 2) AS TotalNeto,
-    year(Fecha) AS Anio,
-    month(Fecha) AS Mes,
-    CASE WHEN Provincia = 'CDMX' THEN true ELSE false END AS EsCDMX
-    FROM ventas_deduplicadas;
-    SELECT * FROM ventas_limpias_sql LIMIT 10;
-    SELECT COUNT(*) FROM ventas_limpias_sql;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img19.png)
+  ```sql
+  CREATE OR REPLACE TABLE ventas_limpias_sql AS
+  SELECT 
+  *,
+  ROUND(Unidades * PrecioUd * (1 - Descuento / 100), 2) AS TotalNeto,
+  year(Fecha) AS Anio,
+  month(Fecha) AS Mes,
+  CASE WHEN Provincia = 'CDMX' THEN true ELSE false END AS EsCDMX
+  FROM ventas_deduplicadas;
+  SELECT * FROM ventas_limpias_sql LIMIT 10;
+  SELECT COUNT(*) FROM ventas_limpias_sql;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img19.png)
 
 - **Paso 2.** Validar registros  
 
-    ```sql
-    SELECT COUNT(*), AVG(TotalNeto), MIN(Fecha), MAX(Fecha) FROM ventas_limpias_sql;
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img20.png)
+  ```sql
+  SELECT COUNT(*), AVG(TotalNeto), MIN(Fecha), MAX(Fecha) FROM ventas_limpias_sql;
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img20.png)
 
 - **Paso 3.** Puedes repetir el **Paso 4** de la **Tarea 3** para visualizar la creación de la tabla mediante la interfaz.
 
 - **Paso 4.** Ejecuta el siguiente comando que escribe el CSV como archivo único en una carpeta pública.
 
-    ```python
-    %python
-    df = spark.table("ventas_limpias_sql")
-    # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
-    df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/ventas_limpias_sql")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img24.png)
+  ```python
+  %python
+  df = spark.table("ventas_limpias_sql")
+  # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
+  df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/ventas_limpias_sql")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img24.png)
 
 - **Paso 5.** Lista y extrae el nombre real del archivo
 
-    ```python
-    %python
-    files = dbutils.fs.ls("dbfs:/FileStore/ventas_limpias_sql")
+  ```python
+  %python
+  files = dbutils.fs.ls("dbfs:/FileStore/ventas_limpias_sql")
 
-    for f in files:
-        if f.name.endswith(".csv"):
-            print(f.name)
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img25.png)
+  for f in files:
+      if f.name.endswith(".csv"):
+          print(f.name)
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img25.png)
 
 - **Paso 6.** Descargalo comodamente generando un enlace desde notebook.
 
-    ```python
-    %python
-    workspace_url = spark.conf.get("spark.databricks.workspaceUrl")
-    filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/ventas_limpias_sql") if f.name.endswith(".csv")][0]
-    displayHTML(f"<a href='https://{workspace_url}/files/ventas_limpias_sql/{filename}' target='_blank'>📥 Descargar CSV</a>")
-    ```
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img26.png)
+  ```python
+  %python
+  workspace_url = spark.conf.get("spark.databricks.workspaceUrl")
+  filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/ventas_limpias_sql") if f.name.endswith(".csv")][0]
+  displayHTML(f"<a href='https://{workspace_url}/files/ventas_limpias_sql/{filename}' target='_blank'>📥 Descargar CSV</a>")
+  ```
+  ---
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img26.png)
 
 - **Paso 7.** Guarda el archivo como **`ventas_limpias_sql`**.
 
