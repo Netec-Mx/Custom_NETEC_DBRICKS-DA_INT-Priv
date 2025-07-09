@@ -39,7 +39,9 @@ Como analista de datos, aprenderás a generar visualizaciones efectivas a partir
 - **Paso 3.** Ahora da clic en el menu lateral izquierdo para cargar el archivo con los datos. Da clic en la parte lateral derecha para **Agregar los datos**
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img23.png)
+
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img24.png)
 
 - **Paso 4.** Da clie en la opción **Create or modify table**.
@@ -51,7 +53,9 @@ Como analista de datos, aprenderás a generar visualizaciones efectivas a partir
   **NOTA:** Puede tardar unos segundos en mostrar los datos.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img26.png)
+
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img27.png)
 
 - **Paso 6.** Da clic en el **Workspace** del menu lateral izquierdo.
@@ -61,7 +65,9 @@ Como analista de datos, aprenderás a generar visualizaciones efectivas a partir
 - **Paso 7.** Crea un nuevo notebook con el nombre `Lab4_Graficos_Tablero`. Selecciona el lenguaje `SQL`.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img19.png)
+
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img1.png)
 
 - **Paso 8.** Adjunta tu clúster activo al Notebook.
@@ -119,14 +125,19 @@ Crear distintos tipos de gráficos usando consultas optimizadas desde el editor 
   ```
   ---
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img4.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img5.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img6.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img7.png)
-  ---
-    
+      
 - **Paso 2.** Gráfico de líneas: Evolución mensual de ventas en CDMX
 
     > Visualización: **Line chart**, eje X: Periodo, eje Y: VentasMensuales
@@ -140,7 +151,9 @@ Crear distintos tipos de gráficos usando consultas optimizadas desde el editor 
   ```
   ---
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img8.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img9.png)    
 
 - **Paso 3.** Gráfico de dispersión: Total vs Promedio de descuento
@@ -153,7 +166,9 @@ Crear distintos tipos de gráficos usando consultas optimizadas desde el editor 
   ```
   ---
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img10.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img11.png)
 
 > **TAREA FINALIZADA**
@@ -204,11 +219,11 @@ Combinar visualizaciones en un panel consolidado.
 
 ---
 
-### Tarea 4: Agregar filtros interactivos
+### Tarea 5: Agregar filtros interactivos
 
 Permitir al usuario explorar los datos seleccionando valores dinámicamente.
 
-#### Tarea 4.1  
+#### Tarea 5.1  
 
 - **Paso 1.** Regresa a tu notebook para crear los filtros.
 
@@ -221,7 +236,9 @@ Permitir al usuario explorar los datos seleccionando valores dinámicamente.
   ```
   ---
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img20.png)
+
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img21.png)
 
 - **Paso 3.** Modifica la consulta SQL para aplicar el filtro
@@ -262,20 +279,24 @@ Permitir al usuario explorar los datos seleccionando valores dinámicamente.
 - **Paso 6.** Ahora ve al dashboard donde estan todos los gráficos. Ajusta los filtros par ala prueba. Luego da clic en el botón `Run All`, y mira los cambios.
 
     ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img25.png)
+    
     ---
+    
     ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img26.png)
+    
     ---
+    
     ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab4/img27.png)
 
 > **TAREA FINALIZADA**
 
 **Resultado esperado:** El dashboard es ahora interactivo y permite analizar según filtros dinámicos.
 
-### Tarea 5: Buenas prácticas y publicación 
+### Tarea 6: Buenas prácticas y publicación 
 
 Optimizar el dashboard y permitir su consulta futura.
 
-#### Tarea 5.1
+#### Tarea 6.1
 
 Los siguientes pasos son de referencia, el paso 3 no podra aplicarse.
 
