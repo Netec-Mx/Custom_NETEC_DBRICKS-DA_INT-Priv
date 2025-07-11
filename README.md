@@ -1,8 +1,6 @@
-# ![Logo](images/neteclogo.png) 
+<img src="images/neteclogo.png" alt="logo" width="300"/>
 
-# Power BI Básico
-
-## Data Analysis with Databricks
+# Data Analysis with Databricks
 
 Bienvenido a la **plataforma de laboratorios** del curso **Data Analysis with Databricks**. Aquí podrás explorar diferentes tecnologías a través de prácticas guiadas. ¡Desarrolla tus habilidades y lleva tus conocimientos al siguiente nivel!
 
