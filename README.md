@@ -11,23 +11,23 @@ Bienvenido a la **plataforma de laboratorios** del curso **Data Analysis with Da
 Cada uno de estos laboratorios están diseñados para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
 
 - **[Configurar entorno individual en Azure Databricks](/Capítulo1/lab0.md)** <br>
-      - **Descripción**: Paso previo a las creaciones y ejecuciones de las consultas de los laboratorios. Es parte de la práctica 1.
+      - **Descripción**: Paso previo a las creaciones y ejecuciones de las consultas de los laboratorios. Es parte de la práctica 1. <br>
       - ⏱️ **Duración estimada**: 30 minutos
 
 - **[Práctica 1: Consultas con SQL en Azure Databricks](/Capítulo1/lab1.md)** <br>
-      - **Descripción**: Prepararás datos de ventas desde un CSV en Databricks y ejecutarás consultas SQL para obtener información clave del negocio.
+      - **Descripción**: Prepararás datos de ventas desde un CSV en Databricks y ejecutarás consultas SQL para obtener información clave del negocio. <br>
       - ⏱️ **Duración estimada**: 30 minutos + 30 minutos de la creación de Databricks.
 
 - **[Práctica 2: Consumo y transformación de datos en Azure Databricks](/Capítulo2/lab2.md)** <br>
-      - **Descripción**: Consumirás y transformarás datos desde una tabla existente usando PySpark y SQL, evaluando su calidad y guardando una versión limpia para análisis futuros.
+      - **Descripción**: Consumirás y transformarás datos desde una tabla existente usando PySpark y SQL, evaluando su calidad y guardando una versión limpia para análisis futuros. <br>
       - ⏱️ **Duración estimada**: 45 minutos.
 
 - **[Práctica 3: Uso de Delta Lake y Datahouses en Azure Databricks](/Capítulo3/lab3.md)** <br>
-      - **Descripción**: Utilizarás Delta Lake para gestionar datos con operaciones seguras y auditorías, construyendo un resumen tipo datahouse para análisis posteriores.
+      - **Descripción**: Utilizarás Delta Lake para gestionar datos con operaciones seguras y auditorías, construyendo un resumen tipo datahouse para análisis posteriores. <br>
       - ⏱️ **Duración estimada**: 45 minutos.
 
 - **[Práctica 4: Creación de gráficos y tableros en Azure Databricks](/Capítulo4/lab4.md)** <br>
-      - **Descripción**: Generarás visualizaciones y dashboards interactivos en Databricks usando SQL, aplicando buenas prácticas y verificando la calidad de los datos.
+      - **Descripción**: Generarás visualizaciones y dashboards interactivos en Databricks usando SQL, aplicando buenas prácticas y verificando la calidad de los datos. <br>
       - ⏱️ **Duración estimada**: 60 minutos.
 
 ---
