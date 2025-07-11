@@ -38,8 +38,10 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
 - **Paso 3.** Cambia a la terminal **`Bash`**haciendo clic en el ícono que se muestra en la imagen. Luego, confirma la ventana emergente.
 
     ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img2.png)
-    ---
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img3.png)
+
+  ---
+
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img3.png)
 
 - **Paso 4.** Ahora que estás en el modo **Bash**, define las variables únicas que identifiquen tus recursos y pégalas en la terminal:
 
@@ -52,7 +54,9 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
   export DATABRICKS_WS="dbw-${USER_ID}"
   export CLUSTER_NAME="cluster-${USER_ID}"
   ```
+
   ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img4.png)
 
 - **Paso 5.** Verifica que las variables se hayan creado correctamente ejecutando los siguientes comandos.
@@ -64,7 +68,9 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
   echo $DATABRICKS_WS
   echo $CLUSTER_NAME
   ```
+
   ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img5.png)
 
   ***💡 NOTA:** Si la terminal se cierra, las variables se perderán. En ese caso, repite el paso 4 para volver a crearlas.*
@@ -74,7 +80,9 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
   ```bash
   az group create --name $RESOURCE_GROUP --location $LOCATION --tags user=$USER_ID lab=lab1
   ```
+
   ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img6.png)
 
 - **Paso 7.** Crea un workspace de Databricks en Azure:
@@ -90,7 +98,8 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
   ---
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img7.png)
-    ---
+
+  ---
 
   ***💡NOTA:** Si te aparce el siguiente mensaje, escribe **`Y`** y espera de **3 a 5 minutos** mientras se instala el `provider`.*
     
@@ -99,13 +108,17 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
 - **Paso 8.** Ve a tu **grupo de recursos** recién creado.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img9.png)
+
   ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img10.png)
 
 - **Paso 9.** Haz clic en el **Databricks Workspace** que creaste.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img11.png)
+
   ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
 
 - **Paso 10.** Dentro del workspace, haz clic en el ícono del **usuario** (localizado en la parte superior derecha) y luego en **Settings**.
@@ -119,7 +132,9 @@ En esta tarea, crearás tu propio grupo de recursos y un workspace de Databricks
 - **Paso 12.** Haz clic en **`Generate new token`**, escribe **`dev`** en el campo de texto y luego da clic en el boton **Generate**. Guarda el token temporalmente.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img15.png)
+
   ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img16.png)
 
 - **Paso 13.** Por seguridad, el token no se muestra en una imagen. Guárdalo temporalmente en un lugar seguro durante el cuso.
