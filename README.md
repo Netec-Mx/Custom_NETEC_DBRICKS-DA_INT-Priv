@@ -10,7 +10,7 @@ Bienvenido a la **plataforma de laboratorios** del curso **Data Analysis with Da
 
 Cada uno de estos laboratorios están diseñados para ofrecerte una experiencia práctica. Haz clic en los enlaces para comenzar.
 
-- **[Práctica 1: Configurar entorno individual en Azure Databricks](/Capítulo1/lab0.md)**
+- **[Configurar entorno individual en Azure Databricks](/Capítulo1/lab0.md)**
       - **Descripción**: Paso previo a las creaciones y ejecuciones de las consultas de los laboratorios. Es parte de la práctica 1.
       - ⏱️ **Duración estimada**: 30 minutos
 
