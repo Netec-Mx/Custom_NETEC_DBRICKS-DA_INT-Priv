@@ -28,18 +28,20 @@ Como analista de datos, aprenderás a usar Delta Lake para gestionar grandes vol
 
 - **Paso 1.** En caso de haber eliminado el workspace de databricks y el servidor, **repite la tarea 1 de la creación de tu ambiente**
 
-    **NOTA:** Si ya tienes el cluster creado avanza al **Paso 2**
+  **NOTA:** Si ya tienes el cluster creado avanza al **Paso 2**
 
-    [Clic Aquí para ir a Práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
+  [Clic Aquí para ir a Práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
 
 - **Paso 2.** Accede a tu workspace de Databricks dando clic en el boton **Launch Workspace**
 
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
 
 - **Paso 3.** Ahora da clic en el menu lateral izquierdo para cargar el archivo con los datos. Da clic en la parte lateral derecha para **Agregar los datos**
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img23.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img24.png)
 
 - **Paso 4.** Da clie en la opción **Create or modify table**.
@@ -51,7 +53,9 @@ Como analista de datos, aprenderás a usar Delta Lake para gestionar grandes vol
   **NOTA:** Puede tardar unos segundos en mostrar los datos.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img26.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img27.png)
 
 - **Paso 6.** Da clic en el **Workspace** del menu lateral izquierdo.
@@ -61,7 +65,9 @@ Como analista de datos, aprenderás a usar Delta Lake para gestionar grandes vol
 - **Paso 7.** Crea un nuevo notebook con el nombre `Lab3_Delta_Datahouse`. Selecciona el lenguaje `SQL`.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img19.png)
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img31.png)
 
 - **Paso 8.** Adjunta tu clúster activo al Notebook.
@@ -83,7 +89,9 @@ Antes de utilizar funcionalidades específicas de Delta Lake, es importante conf
   ```sql
   DESCRIBE DETAIL ventas_limpias;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img1.png)
 
 > **TAREA FINALIZADA**
@@ -105,7 +113,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
   SET Descuento = Descuento + 5
   WHERE Provincia = 'CDMX' AND Anio = 2024;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img2.png)
 
 
@@ -116,7 +126,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
   SET PrecioUd = (SELECT AVG(PrecioUd) FROM ventas_limpias)
   WHERE PrecioUd <= 0;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img3.png)
 
 
@@ -125,7 +137,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
   ```sql
   ALTER TABLE ventas_limpias ADD COLUMNS (CategoriaDescuento STRING);
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img4.png)
 
   ```sql
@@ -137,7 +151,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
       ELSE 'Alto'
   END;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img5.png)
 
 - **Paso 4.** Para ver los valores de la nueva columna CategoriaDescuento junto con los datos relevantes
@@ -147,7 +163,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
   FROM ventas_limpias
   LIMIT 20;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img6.png)
 
 - **Paso 5.** Ver conteo por categoría.
@@ -157,7 +175,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
   FROM ventas_limpias
   GROUP BY CategoriaDescuento;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img7.png)
 
 - **Paso 6.** Tip adicional: Asegurate de que no haya **NULLs** inesperados
@@ -167,7 +187,9 @@ Actualizar valores existentes es una necesidad común al aplicar lógica de nego
   FROM ventas_limpias
   WHERE CategoriaDescuento IS NULL;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img8.png)
 
 > **TAREA FINALIZADA**
@@ -188,7 +210,9 @@ Eliminar datos permite mantener integridad, especialmente cuando hay registros n
   SELECT COUNT(*) FROM ventas_limpias
   WHERE TotalNeto IS NULL OR TotalNeto < 20;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img9.png)
 
 - **Paso 2.** Eliminar filas con `TotalNeto` nulo o extremadamente bajo.
@@ -197,7 +221,9 @@ Eliminar datos permite mantener integridad, especialmente cuando hay registros n
   DELETE FROM ventas_limpias
   WHERE TotalNeto IS NULL OR TotalNeto < 20;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img10.png)
     
 
@@ -207,14 +233,20 @@ Eliminar datos permite mantener integridad, especialmente cuando hay registros n
   SELECT COUNT(*) FROM ventas_limpias
   WHERE Provincia = 'Jalisco' AND Anio < 2023;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img11.png)
+  
   ---
+  
   ```sql
   DELETE FROM ventas_limpias
   WHERE Provincia = 'Jalisco' AND Anio < 2023;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img12.png)
 
 > **TAREA FINALIZADA**
@@ -234,7 +266,9 @@ Delta Lake permite consultar versiones anteriores para análisis histórico o re
   ```sql
   DESCRIBE HISTORY ventas_limpias;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img13.png)
 
 
@@ -243,20 +277,24 @@ Delta Lake permite consultar versiones anteriores para análisis histórico o re
   ```sql
   SELECT COUNT(*) FROM ventas_limpias VERSION AS OF 0;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img14.png)
 
 
 - **Paso 3.** Comparar registros entre dos versiones distintas (0 y 1).
 
-    **NOTA:** El resultado puede ser extenso puedes hacer **scroll** para ver la información.
+  **NOTA:** El resultado puede ser extenso puedes hacer **scroll** para ver la información.
 
   ```sql
   SELECT * FROM ventas_limpias VERSION AS OF 0
   EXCEPT
   SELECT * FROM ventas_limpias VERSION AS OF 1;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img15.png)
 
 
@@ -266,7 +304,9 @@ Delta Lake permite consultar versiones anteriores para análisis histórico o re
   CREATE OR REPLACE TABLE ventas_backup AS
   SELECT * FROM ventas_limpias VERSION AS OF 0;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img16.png)
 
 > **TAREA FINALIZADA** 
@@ -287,7 +327,9 @@ Delta Lake permite consultar versiones anteriores para análisis histórico o re
   CREATE OR REPLACE TEMP VIEW nuevas_ventas AS
   SELECT *, TotalNeto + 10 AS TotalNetoMod FROM ventas_limpias LIMIT 5;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img17.png)
 
 - **Paso 2.** Ejecutar `MERGE` para actualizar los registros si ya existen o insertar si no.
@@ -299,7 +341,9 @@ Delta Lake permite consultar versiones anteriores para análisis histórico o re
   WHEN MATCHED THEN UPDATE SET TotalNeto = source.TotalNeto
   WHEN NOT MATCHED THEN INSERT *;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img18.png)
 
 > **TAREA FINALIZADA**
@@ -330,7 +374,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   FROM ventas_limpias
   GROUP BY Anio, Mes, Provincia;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img19.png)
 
 - **Paso 2.** Visualizar los primeros registros de la tabla resumen.
@@ -347,7 +393,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   ```sql
   SELECT COUNT(*) FROM resumen_ventas;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img21.png)
 
 - **Paso 4.** Ver el total general comparado con el detalle.
@@ -355,15 +403,23 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   ```sql
   SELECT ROUND(SUM(TotalNeto), 2) AS TotalDetalle FROM ventas_limpias;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img22.png)
+  
   ---
+  
   ```sql
   SELECT ROUND(SUM(TotalVentas), 2) AS TotalResumen FROM resumen_ventas;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img23.png)
+  
   ---
+  
   **NOTA:** Ambos valores deben coincidir si **ventas_limpias** no ha cambiado.
 
 - **Paso 5.** Ver un resumen por provincia.
@@ -374,7 +430,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   GROUP BY Provincia
   ORDER BY VentasProvincia DESC;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img24.png)
 
 - **Paso 6.** Ver valores extremos.
@@ -383,10 +441,12 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   SELECT MAX(VentaMayor) AS VentaMaxima, MIN(VentaMenor) AS VentaMinima
   FROM resumen_ventas;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img25.png)
 
-    **NOTA:** Te permite confirmar que los valores extremos están dentro de los rangos lógicos esperados.
+  **NOTA:** Te permite confirmar que los valores extremos están dentro de los rangos lógicos esperados.
 
 - **Paso 7.** Crear vista comparativa entre regiones
 
@@ -397,7 +457,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   WHERE Provincia IN ('CDMX', 'Jalisco')
   ORDER BY Anio, Mes;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img26.png)
 
 - **Paso 8.** Consultar contenido de la vista creada.
@@ -406,7 +468,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   SELECT * FROM comparativo_cdmx_vs_jalisco
   LIMIT 10;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img27.png)
 
 - **Paso 9.** Validar ventas por región y año.
@@ -417,7 +481,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   GROUP BY Provincia, Anio
   ORDER BY Anio, Provincia;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img28.png)
 
 - **Paso 10.** Vista para detectar provincias con alto volumen
@@ -429,7 +495,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   GROUP BY Provincia
   ORDER BY TotalAnual DESC;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img29.png)
 
 - **Paso 11.** Esto te mostrará el ranking de provincias por ventas acumuladas
@@ -437,6 +505,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   ```sql
   SELECT * FROM provincias_top;
   ```
+  
+  ---
+
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img30.png)
 
 - **Paso 12.** Ejecuta el siguiente comando que escribe el CSV como archivo único en una carpeta pública.
@@ -447,7 +518,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
   df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/resumen_ventas")
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img32.png)
 
 - **Paso 13.** Lista y extrae el nombre real del archivo
@@ -460,7 +533,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
       if f.name.endswith(".csv"):
           print(f.name)
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img33.png)
 
 - **Paso 14.** Descargalo comodamente generando un enlace desde notebook.
@@ -472,7 +547,9 @@ Una tabla agregada permite observar métricas clave por región, mes y año y pr
   filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/resumen_ventas") if f.name.endswith(".csv")][0]
   displayHTML(f"<a href='https://{workspace_url}/files/resumen_ventas/{filename}' target='_blank'>📥 Descargar CSV</a>")
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab3/img34.png)
 
 - **Paso 15.** Guarda el archivo como **`resumen_ventas`**.

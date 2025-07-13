@@ -1,17 +1,19 @@
 # Práctica 2. Consumo y transformación de datos en Azure Databricks
 
-## 🎯 Objetivos:
+## Objetivos:
+
 Al finalizar la práctica, serás capaz de:
 - Consumir información desde una tabla existente, evaluar su calidad y aplicar procesos de limpieza y enriquecimiento utilizando dos enfoques distintos: transformaciones con PySpark y transformaciones con SQL.
 - Guardar una versión limpia del dataset para usarla en análisis posteriores.
 
-## 📝 Requisitos previos:
+## Requisitos previos:
 
 - Haber completado la Práctica 1  
 - Tener acceso al clúster Databricks y a la tabla `ventas`  
 - Conocimientos básicos de PySpark y SQL
 
-## 🕒 Duración aproximada:
+## Duración aproximada:
+
 - 45 minutos.
 
 ---
@@ -28,13 +30,13 @@ Al finalizar la práctica, serás capaz de:
 
 - **Paso 1.** Si eliminaste tu workspace de Databricks o el clúster, **repite la Tarea 1 de la práctica de configuración del entorno**.
 
-    ***💡 NOTA:** Si ya tienes el clúster creado, avanza directamente al **Paso 2**.*
+  **NOTA:** Si ya tienes el clúster creado, avanza directamente al **Paso 2**.
 
-    [Haz clic aquí para ir a la práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
+  [Haz clic aquí para ir a la práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
 
 - **Paso 2.** Accede a tu workspace de Databricks haciendo clic en el botón **Launch Workspace**.
 
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
 
 - **Paso 3.** Descarga el dataset de demostración desde este **[enlace](https://neteclabs.blob.core.windows.net/courses/databricks/intermedio/databricks-int-dataset.csv)**.
 
@@ -52,7 +54,7 @@ Al finalizar la práctica, serás capaz de:
 
 - **Paso 6.** Arrastra o carga el archivo que descargaste previamente, verifica los datos y haz clic en **Create table**.
 
-  ***💡 NOTA:** Puede tardar unos segundos en mostrar los datos.*
+  **NOTA:** Puede tardar unos segundos en mostrar los datos.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img26.png)
 
@@ -142,7 +144,9 @@ Antes de transformar los datos, es esencial entender su estado actual: su estruc
   %python
   ventas.groupBy(ventas.columns).count().filter("count > 1").count()
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img5.png)
 
 > **TAREA FINALIZADA**
@@ -191,7 +195,9 @@ En esta tarea, procesarás los datos usando PySpark para generar un nuevo DataFr
   ventas.select("Fecha").distinct().show(5)
   ventas_limpias.select("Fecha").distinct().show(5)
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img8.png)
 
 #### Tarea 3.2.
@@ -255,16 +261,18 @@ Guardarás los resultados procesados con PySpark en una nueva tabla Delta llamad
   ```sql
   SELECT COUNT(*), AVG(TotalNeto), MIN(Fecha), MAX(Fecha) FROM ventas_limpias;
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img12.png)
 
 - **Paso 3.** Para validar desde la interfaz gráfica, haz clic en la sección **Catalog** del menú lateral izquierdo.
 
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img13.png)
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img13.png)
 
 - **Paso 4.** Si es necesario, conecta tu **`cluster al catalog`**, expande el metastore de Hive y verás la tabla que guardaste.
 
-    ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img14.png)
+  ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img14.png)
 
 - **Paso 5.** Regresa a tu **notebook** y crea una nueva celda debajo de la última.
 
@@ -276,6 +284,7 @@ Guardarás los resultados procesados con PySpark en una nueva tabla Delta llamad
   # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
   df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/ventas_limpias")
   ```
+  
   ---
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img21.png)
@@ -290,7 +299,9 @@ Guardarás los resultados procesados con PySpark en una nueva tabla Delta llamad
       if f.name.endswith(".csv"):
           print(f.name)
   ```
+ 
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img22.png)
 
 - **Paso 8.** Descarga el archivo fácilmente generando un enlace directo desde el notebook.
@@ -301,7 +312,9 @@ Guardarás los resultados procesados con PySpark en una nueva tabla Delta llamad
   filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/ventas_limpias") if f.name.endswith(".csv")][0]
   displayHTML(f"<a href='https://{workspace_url}/files/ventas_limpias/{filename}' target='_blank'>📥 Descargar CSV</a>")
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img23.png)
 
 - **Paso 9.** Guarda el archivo con el nombre **`ventas_limpias`**.
@@ -405,7 +418,9 @@ Para analistas que prefieren trabajar exclusivamente con SQL, esta tarea ofrece 
   # Ruta correcta para DBFS virtual (dbutils, navegación, descarga)
   df.coalesce(1).write.option("header", "true").mode("overwrite").csv("dbfs:/FileStore/ventas_limpias_sql")
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img24.png)
 
 - **Paso 5.** Lista y extrae el nombre real del archivo:
@@ -418,7 +433,9 @@ Para analistas que prefieren trabajar exclusivamente con SQL, esta tarea ofrece 
       if f.name.endswith(".csv"):
           print(f.name)
   ```
+ 
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img25.png)
 
 - **Paso 6.** Descarga el archivo cómodamente generando un enlace directo desde el notebook.
@@ -429,7 +446,9 @@ Para analistas que prefieren trabajar exclusivamente con SQL, esta tarea ofrece 
   filename = [f.name for f in dbutils.fs.ls("dbfs:/FileStore/ventas_limpias_sql") if f.name.endswith(".csv")][0]
   displayHTML(f"<a href='https://{workspace_url}/files/ventas_limpias_sql/{filename}' target='_blank'>📥 Descargar CSV</a>")
   ```
+  
   ---
+  
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab2/img26.png)
 
 - **Paso 7.** Guarda el archivo con el nombre **`ventas_limpias_sql`**.
