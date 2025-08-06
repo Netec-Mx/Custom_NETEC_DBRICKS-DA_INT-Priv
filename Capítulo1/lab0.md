@@ -1,43 +1,42 @@
 # Práctica: Configurar entorno individual en Azure Databricks
 
-## Objetivo
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Configurar tu propio entorno de trabajo en Azure, creando un grupo de recursos, un workspace de Databricks y un clúster Spark individual, listo para análisis y desarrollo con SQL y notebooks.
 
-Que cada analista configure su propio entorno de trabajo en Azure, creando un grupo de recursos, un workspace de Databricks y un clúster Spark individual, listo para análisis y desarrollo con SQL y notebooks.
+## 📝 Requisitos previos:
 
-## Requisitos Previos
+- Tener una cuenta activa en Azure (credenciales asignadas por el instructor).
+- Contar con conexión a internet.
+- Poseer conocimientos básicos de Bash y del portal de Azure.
+- Haber iniciado sesión en el portal de Azure.
 
-- Cuenta activa en Azure (credenciales asignadas por el instructor)
-- Conexión a internet
-- Conocimiento básico de Bash y Azure Portal
-- Haber iniciado sesión en el portal de Azure
-
-## Duración aproximada
-
-- 30 minutos
-
----
-
-**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo4/lab4.html)** | **[Lista General](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)**
+## 🕒 Duración aproximada:
+- 30 minutos.
 
 ---
 
-## Instrucciones
+**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo4/lab4.html)** | **[Lista general](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)**
 
-### Tarea 1: Configurar entorno individual  
+---
 
-En esta tarea, cada analista creará su propio grupo de recursos y su propio workspace de Databricks. Además, se configurará un clúster Spark con recursos mínimos para ejecutar los análisis SQL.
+## Instrucciones:
 
-#### Tarea 1.1
+### Tarea 1: Configurar entorno individual.
 
-- **Paso 1.** Iniciar sesion en el Portal de Azure [Aqui](https://portal.azure.com/), coloca las **credenciales** que se te asignaron al curso.
+En esta tarea, cada analista creará su propio grupo de recursos y su propio workspace de Databricks. Además, se configurará un clúster Spark con recursos mínimos para ejecutar análisis en SQL.
 
-  **NOTA:** Posiblemente te pida que registres la cuenta con MFA, si es asi continua con el proceso, sino avanza al paso 2.
+#### Tarea 1.1.
 
-- **Paso 2.** Da clic en el icono de **Cloud Shell** para abrir la terminal.
+- **Paso 1.** Inicia sesión en el portal de Azure [aquí](https://portal.azure.com/) y coloca las credenciales que se te asignaron para el curso.
+
+> 💡 ***Nota:** Es posible que se te pida registrar la cuenta con MFA. Si es así, continúa con el proceso; si no, avanza al paso 2.*
+
+- **Paso 2.** Da clic en el ícono de **Cloud Shell** para abrir la terminal.
 
   ![dbricks1](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img1.png)
 
-- **Paso 3.** Ahora cambia a la terminal **`Bash`**, da clic en el icono de la imagen. Confirma la ventana emergente.
+- **Paso 3.** Cambia a la terminal **`Bash`**. Da clic en el ícono que aparece en la imagen y confirma la ventana emergente.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img2.png)
   
@@ -45,9 +44,9 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
     
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img3.png)
 
-- **Paso 4.** Ahora en el modo **Bash** define las variables únicas que identifiquen tus recursos y pegalas en la terminal:
+- **Paso 4.** Ahora, en el modo **Bash** , define las variables únicas que identifiquen tus recursos y pégalas en la terminal:
 
-  **NOTA:** Cambia las `xxx`por tus iniciales. Ejemplo `jjon`, `mperez`. Editalo en un **bloc de notas** si es necesario.
+> 💡 ***Nota:** Cambia las `xxx`por tus iniciales. Por ejemplo: `jjon`, `mperez`. Edítalo en un **Bloc de notas** si es necesario.*
 
   ```bash
   export USER_ID=xxxxx
@@ -61,7 +60,7 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img4.png)
 
-- **Paso 5.** Verifica que las variables se hayan creado correctamente, ejecuta los siguientes comandos.
+- **Paso 5.** Verifica que las variables se hayan creado correctamente. Ejecuta los siguientes comandos:
 
   ```bash
   echo $USER_ID
@@ -75,7 +74,7 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img5.png)
 
-  **NOTA:** Si se cierra la terminal las variables se pierden, repite el paso 4 para crearlas nuevamente.
+> 💡 ***Nota:** Si se cierra la terminal, las variables se pierden. Repite el paso 4 para crearlas nuevamente.*
 
 - **Paso 6.** Crea un grupo de recursos.
 
@@ -104,7 +103,7 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   
   ---
   
-  **NOTA:** Si te aparce el siguiente mensaje escribe **`Y`**. Y Espera de **3 a 5 minutos** en lo que instala el `provider`.
+> 💡 ***Nota:** Si te aparece el siguiente mensaje, escribe **`Y`**y espera de 3 a 5 minutos mientras se instala el `provider`.*
     
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img8.png)
 
@@ -116,7 +115,7 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img10.png)
 
-- **Paso 9.** Ahora da clic en el **Databricks Workspace** creado.
+- **Paso 9.** Da clic en el **Databricks Workspace** que creaste.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img11.png)
   
@@ -124,15 +123,15 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
 
-- **Paso 10.** Dentro del workspace da clic en el icono del **usuario** superior derecho. Y luego en **Setings**.
+- **Paso 10.** Dentro del workspace, da clic en el ícono del **usuario** superior derecho (esquina superior derecha) y luego en **Setings**.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img13.png)
 
-- **Paso 11.** Clic en **Developer** y en la sección de **Access tokens** clic en el botón **Manage**.
+- **Paso 11.** Haz clic en **Developer** y, en la sección de **Access tokens**, da clic en el botón **Manage**.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img14.png)
 
-- **Paso 12.** Clic en **`Generate new token`**, escribe **`dev`** en el campo de texto y clic en el boton **Generate** y guarda el token temporalmente.
+- **Paso 12.** Haz clic en **`Generate new token`**, escribe **`dev`** en el campo de texto y da clic en el botón **Generate** y guarda el token temporalmente.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img15.png)
   
@@ -140,7 +139,7 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img16.png)
 
-- **Paso 13.** Por seguridad no se muestra el token en una imagen, guardalo temporalmente en un lugar seguro durante el cuso.
+- **Paso 13.** Por seguridad, el token no se muestra en una imagen. Guárdalo temporalmente en un lugar seguro durante el curso.
 
 - **Paso 14.** Una vez creado el workspace, obtén la URL del workspace.
 
@@ -151,15 +150,15 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
   echo $DATABRICKS_HOST
   ```
 
-- **Paso 15.** Ahora crea la variable con tu token de autenticación. Sustituye las `x` por el valor de tu token.
+- **Paso 15.** Ahora crea la variable con tu token de autenticación. Sustituye las x por el valor de tu token.
 
-  **NOTA:** Editalo antes en un bloc de notas.
+> 💡 ***Nota:** Edítalo antes en un **Bloc de notas**.*
 
   ```bash
   export DATABRICKS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxx
   ```
 
-- **Paso 16.** Luego, crea un clúster de procesamiento usando la API REST para mayor facilidad.
+- **Paso 16.** Crea un clúster de procesamiento usando la API REST para mayor facilidad.
 
   ```bash
   curl -X POST https://$DATABRICKS_HOST/api/2.0/clusters/create \
@@ -190,14 +189,14 @@ En esta tarea, cada analista creará su propio grupo de recursos y su propio wor
 
 ---
 
-> **¡FELICIDADES HAZ COMPLETADO LA PREPARACIÓN DE TU AMBIENTE!**
+> **¡Felicidades, has completado la preparación de tu ambiente!**
 
-**Resultado final:**
+## Resultado final:
 
-- Se crea exitosamente un clúster Spark de nodo único bajo el control individual del usuario.
-- El clúster queda disponible en el Workspace de Databricks para ejecutar notebooks y scripts SQL.
-- Se confirma que el entorno quedó etiquetado, aislado y operativo para análisis de datos.
+- Se creó exitosamente un clúster Spark de nodo único, bajo el control individual del usuario.
+- El clúster quedó disponible en el Workspace de Databricks para ejecutar notebooks y scripts SQL.
+- Se confirmó que el entorno quedó etiquetado, aislado y operativo para análisis de datos.
 
 ---
 
-**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo4/lab4.html)** | **[Lista General](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)**
+**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo4/lab4.html)** | **[Lista general](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)**
