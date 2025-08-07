@@ -1,24 +1,21 @@
 # Práctica 2. Consumo y transformación de datos en Azure Databricks
 
-## Objetivos:
-
+## 🎯 Objetivos:
 Al finalizar la práctica, serás capaz de:
 - Consumir información desde una tabla existente, evaluar su calidad y aplicar procesos de limpieza y enriquecimiento utilizando dos enfoques distintos: transformaciones con PySpark y transformaciones con SQL.
 - Guardar una versión limpia del dataset para usarla en análisis posteriores.
 
-## Requisitos previos:
+## 📝 Requisitos previos:
+- Haber completado la Práctica 1.
+- Tener acceso al clúster Databricks y a la tabla `ventas`.  
+- Contar con conocimientos básicos de PySpark y SQL.
 
-- Haber completado la Práctica 1  
-- Tener acceso al clúster Databricks y a la tabla `ventas`  
-- Conocimientos básicos de PySpark y SQL
-
-## Duración aproximada:
-
+## 🕒 Duración aproximada:
 - 45 minutos.
 
 ---
 
-**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)** | **[Lista General](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo3/lab3.html)**
+**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)** | **[Lista general](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo3/lab3.html)**
 
 ---
 
@@ -30,7 +27,7 @@ Al finalizar la práctica, serás capaz de:
 
 - **Paso 1.** Si eliminaste tu workspace de Databricks o el clúster, **repite la Tarea 1 de la práctica de configuración del entorno**.
 
-  **NOTA:** Si ya tienes el clúster creado, avanza directamente al **Paso 2**.
+> 💡 ***Nota:** Si ya tienes el clúster creado, avanza directamente al **Paso 2**.*
 
   [Haz clic aquí para ir a la práctica: Configurar entorno individual en Azure Databricks](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)
 
@@ -54,7 +51,7 @@ Al finalizar la práctica, serás capaz de:
 
 - **Paso 6.** Arrastra o carga el archivo que descargaste previamente, verifica los datos y haz clic en **Create table**.
 
-  **NOTA:** Puede tardar unos segundos en mostrar los datos.
+> 💡 ***Nota:** Puede tardar unos segundos en mostrar los datos.*
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img26.png)
 
@@ -462,7 +459,7 @@ Se ha generado una tabla llamada `ventas_limpias_sql` equivalente a la creada co
 
 > **¡FELICIDADES! HAS COMPLETADO EL LABORATORIO 2.**
 
-## Resultado final
+## Resultado final:
 
 Como analista, ahora cuentas con dos versiones limpias del dataset:
 
@@ -472,4 +469,4 @@ Como analista, ahora cuentas con dos versiones limpias del dataset:
 Ambas están listas para visualización, análisis estadístico o integración con dashboards. Con este laboratorio, reforzaste tu comprensión de procesos ETL simples desde dos enfoques distintos, lo que te brinda mayor flexibilidad según tu experiencia técnica.
 
 ---
-**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)** | **[Lista General](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo3/lab3.html)**
+**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab1.html)** | **[Lista general](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo3/lab3.html)**
