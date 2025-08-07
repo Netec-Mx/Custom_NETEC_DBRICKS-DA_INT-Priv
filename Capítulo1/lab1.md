@@ -1,43 +1,41 @@
-# Práctica 1: Consultas con SQL en Azure Databricks
+# Práctica 1. Consultas con SQL en Azure Databricks
 
-## Objetivo  
+## 🎯 Objetivos:
+Al finalizar la práctica, serás capaz de:
+- Preparar el conjunto de datos de ventas a partir de un archivo CSV cargado localmente en Databricks, y ejecutar múltiples consultas SQL para extraer información clave del negocio. Este laboratorio constituye la base para trabajos posteriores de transformación y visualización de datos.
 
-Como analista de datos, aprenderás a preparar el conjunto de datos de ventas desde un archivo CSV cargado localmente a Databricks, y la ejecución de múltiples consultas SQL para extraer información clave del negocio. Este laboratorio constituye la base para trabajos posteriores de transformación y visualización de datos.
+## 📝 Requisitos previos:
+- Tener acceso a Azure Cloud Shell desde el navegador ([Shell de Azure](https://shell.azure.com)). 
+- Contar con permisos de **colaborador** sobre una suscripción de Azure compartida. 
+- Tener conocimientos básicos de SQL.
+- Disponer del archivo `ventas_dataset.csv` previamente cargado en un contenedor de Azure Storage accesible públicamente.
 
-## Requisitos
-
-- Acceso a Azure Cloud Shell desde el navegador ([Shell de Azure](https://shell.azure.com))  
-- Permisos de **colaborador** sobre una suscripción de Azure compartida  
-- Conocimientos básicos de SQL  
-- Archivo `ventas_dataset.csv` previamente cargado en un contenedor de Azure Storage accesible públicamente
-
-## Duración aproximada  
-
-- 60 minutos (30 minutos son de la creación de tu ambiente)
+## 🕒 Duración aproximada:
+- 60 minutos (30 minutos son de la creación de tu ambiente).
 
 ---
 
-**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)** | **[Lista General](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo2/lab2.html)**
+**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)** | **[Lista general](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo2/lab2.html)**
 
 ---
 
-## Instrucciones
+## Instrucciones:
 
-### Tarea 1: Cargar datos de ventas a Databricks
+### Tarea 1: Cargar datos de ventas en Databricks.
 
 En esta tarea, utilizarás un archivo CSV para crear una tabla Delta en Databricks y dejarla disponible para consultas SQL.
 
-#### Tarea 1.1
+#### Tarea 1.1.
 
-- **Paso 1.** Accede a tu workspace de Databricks dando clic en el boton **Launch Workspace**
+- **Paso 1.** Accede a tu _workspace_ de Databricks dando clic en el botón **Launch Workspace**
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img12.png)
 
-- **Paso 2.** Da clic en el **Workspace** del menu lateral izquierdo.
+- **Paso 2.** Da clic en **Workspace** en el menú lateral izquierdo.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img18.png)
 
-- **Paso 3.** Crea un nuevo notebook con el nombre `Lab1_SQL_Consultas`. Selecciona el lenguaje `SQL`.
+- **Paso 3.** Crea un nuevo _notebook_ con el nombre `Lab1_SQL_Consultas` y selecciona el lenguaje `SQL`.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img19.png)
   
@@ -45,13 +43,13 @@ En esta tarea, utilizarás un archivo CSV para crear una tabla Delta en Databric
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img20.png)
 
-- **Paso 4.** Adjunta tu clúster activo al Notebook.
+- **Paso 4.** Adjunta tu clúster activo al _notebook_.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img21.png)
 
-- **Paso 5.** Descargar el dataset demostrativo **[Aquí](https://neteclabs.blob.core.windows.net/courses/databricks/intermedio/databricks-int-dataset.csv)**
+- **Paso 5.** Descarga el dataset demostrativo desde **[aquí](https://neteclabs.blob.core.windows.net/courses/databricks/intermedio/databricks-int-dataset.csv)**.
 
-- **Paso 6.** Ahora da clic en el menu lateral izquierdo para cargar el archivo con los datos. Da clic en la parte lateral derecha para **Agregar los datos**
+- **Paso 6.** Da clic en el menú lateral izquierdo para cargar el archivo con los datos. Luego, haz clic en la parte lateral derecha para **agregar los datos**.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img23.png)
   
@@ -59,13 +57,13 @@ En esta tarea, utilizarás un archivo CSV para crear una tabla Delta en Databric
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img24.png)
 
-- **Paso 7.** Da clie en la opción **Create or modify table**.
+- **Paso 7.** Da clic en la opción **Create or modify table**.
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img25.png)
 
 - **Paso 8.** Arrastra o carga el archivo previamente descargado, verifica los datos y da clic en **Create table**.
 
-  **NOTA:** Puede tardar unos segundos en mostrar los datos.
+> 💡 ***Nota:** Puede tardar unos segundos en mostrar los datos.*
 
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img26.png)
   
@@ -73,7 +71,7 @@ En esta tarea, utilizarás un archivo CSV para crear una tabla Delta en Databric
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img27.png)
 
-- **Paso 9.** Ahora regresa a tu **Notebook** para leer la tabla con consultas de SQL. `Workspace - Home - Lab1_SQL_Consultas` 
+- **Paso 9.** Regresa a tu **notebook** para leer la tabla utilizando consultas SQL. Ruta: `Workspace - Home - Lab1_SQL_Consultas`.
 
 - **Paso 10.** Ejecuta el siguiente código para validar la carga del archivo CSV:
 
@@ -85,9 +83,9 @@ En esta tarea, utilizarás un archivo CSV para crear una tabla Delta en Databric
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img28.png)
 
-- **Paso 11.** Ejecuta el siguiente comando para cambiar el nombre de la tabla a **`ventas`** para mayor facilidad.
+- **Paso 11.** Ejecuta el siguiente comando para cambiar el nombre de la tabla a **`ventas`**, para mayor facilidad.
 
-  **NOTA:** Agrega otra celda nueva debajo de la consulta de las tablas.
+> 💡 ***Nota:** Agrega una nueva celda debajo de la consulta de las tablas.*
 
   ```sql
   ALTER TABLE databricks_int_dataset RENAME TO ventas;
@@ -99,23 +97,25 @@ En esta tarea, utilizarás un archivo CSV para crear una tabla Delta en Databric
   
   ---
   
-  **NOTA:** Si es necesario repite el paso anterior para validar la tabla y el nombre.
+> 💡 ***Nota:** Si es necesario, repite el paso anterior para validar la tabla y su nombre.*
 
 > **TAREA FINALIZADA**
 
-**Resultado esperado:** Tener una tabla llamada `ventas` almacenada en formato Delta con 10 Mil registros reales aproximadamente, lista para consultas en SQL.
+### Resultado esperado:
+
+Tener una tabla llamada `ventas`, almacenada en formato Delta, con aproximadamente 10 mil registros reales, lista para consultas en SQL.
 
 ---
 
-### Tarea 2: Ejecutar consultas SQL sobre la tabla de ventas  
+### Tarea 2: Ejecutar consultas SQL sobre la tabla de ventas. 
 
-En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obtener insights del conjunto de datos cargado.
+En esta tarea, realizarás distintas consultas SQL para explorar, segmentar y obtener insights del conjunto de datos cargado.
 
-#### Tarea 2.1: Exploración general
+#### Tarea 2.1. Exploración general.
 
-- **Paso 1.** Ejecuta estas consultas para revisar la estructura y contenido de la tabla:
+- **Paso 1.** Ejecuta estas consultas para revisar la estructura y el contenido de la tabla:
 
-  **NOTA:** Agrega otra celda mas debajo de la que ya existe.
+> 💡 ***Nota:** Agrega una celda más debajo de la que ya existe.*
 
   ```sql
   SELECT * FROM ventas LIMIT 10;
@@ -163,7 +163,7 @@ En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obt
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img34.png)
 
-#### Tarea 2.2: Cálculos fila a fila
+#### Tarea 2.2: Cálculos fila a fila.
 
 - **Paso 1.** Ejecuta la siguiente consulta en la celda.
 
@@ -187,7 +187,7 @@ En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obt
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img36.png)
 
-#### Tarea 2.3: Agrupaciones y conteo
+#### Tarea 2.3: Agrupaciones y conteo.
 
 - **Paso 1.** Ejecuta la siguiente consulta en la celda.
   
@@ -226,7 +226,7 @@ En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obt
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img39.png)
 
-#### Tarea 2.4: Análisis temporal
+#### Tarea 2.4: Análisis temporal.
 
 - **Paso 1.** Ejecuta la siguiente consulta en la celda.
 
@@ -248,7 +248,7 @@ En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obt
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img41.png)
 
-#### Tarea 2.5: Filtros y subconsultas
+#### Tarea 2.5: Filtros y subconsultas.
 
 - **Paso 1.** Ejecuta la siguiente consulta en la celda.
   
@@ -282,7 +282,7 @@ En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obt
   
   ![dbricks2](/Custom_NETEC_DBRICKS-DA_INT-Priv/images/lab1/img44.png)
 
-#### Tarea 2.6: Análisis de clientes
+#### Tarea 2.6: Análisis de clientes.
 
 - **Paso 1.** Ejecuta la siguiente consulta en la celda.
   
@@ -300,16 +300,18 @@ En esta tarea realizarás distintas consultas SQL para explorar, segmentar y obt
 
 > **TAREA FINALIZADA**
 
-**Resultado esperado:** Obtener una visión general del comportamiento de las ventas, formas de pago frecuentes, artículos y clientes más activos, así como detectar valores extremos o comportamientos inusuales.
+### Resultado esperado:
+
+Obtener una visión general del comportamiento de las ventas, las formas de pago más frecuentes, los artículos y clientes más activos, así como detectar valores extremos o comportamientos inusuales.
 
 ---
 
-> **¡FELICIDADES HAZ COMPLETADO EL LABORATORIO 1!**
+> **¡Felicidades, has completado el Laboratorio 1!**
 
-## Resultado final
+## Resultado final:
 
-Cada analista habrá cargado un conjunto de datos real a Databricks, y ejecutado más de 15 consultas SQL organizadas por propósito analítico. Esto proporcionará una base sólida para los siguientes pasos del ciclo de análisis: limpieza, transformación, modelado y visualización.
+Cada analista habrá cargado un conjunto de datos real en Databricks y ejecutado más de 15 consultas SQL, organizadas por propósito analítico. Esto proporcionará una base sólida para los siguientes pasos del ciclo de análisis: limpieza, transformación, modelado y visualización.
 
 ---
 
-**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)** | **[Lista General](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo2/lab2.html)**
+**[⬅️ Atrás](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo1/lab0.html)** | **[Lista general](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/)** | **[Siguiente ➡️](https://netec-mx.github.io/Custom_NETEC_DBRICKS-DA_INT-Priv/Capítulo2/lab2.html)**
